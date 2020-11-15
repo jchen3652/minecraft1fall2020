@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "i",
+    "i",
+    "o"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:netherite_block"
+    },
+    "o": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "myfirstmod:magic_sword"
+  }
+}
+
