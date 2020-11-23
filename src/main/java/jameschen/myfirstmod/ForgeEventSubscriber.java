@@ -1,17 +1,18 @@
 package jameschen.myfirstmod;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.EndermanEntity;
+import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 
 @EventBusSubscriber(modid = MyFirstMod.modid, bus = EventBusSubscriber.Bus.FORGE)
 public class ForgeEventSubscriber {
@@ -45,21 +46,23 @@ public class ForgeEventSubscriber {
 		if (!event.getEntity().world.isRemote() && event.getEntity().getType().equals(EntityType.ZOMBIE)) {
 			ZombieEntity zombie = (ZombieEntity) event.getEntity();
 			
-			zombie.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.field_234754_kI_));
+			zombie.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
 			zombie.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(Items.SHIELD));
-			zombie.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(Items.field_234763_ls_));
-			zombie.setItemStackToSlot(EquipmentSlotType.CHEST, new ItemStack(Items.field_234764_lt_));
-			zombie.setItemStackToSlot(EquipmentSlotType.LEGS, new ItemStack(Items.field_234765_lu_));
-			zombie.setItemStackToSlot(EquipmentSlotType.FEET, new ItemStack(Items.field_234766_lv_));
-			
-			
-			
-			
-			
-//			zombie.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
-			
-			
+			zombie.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(Items.NETHERITE_HELMET));
+			zombie.setItemStackToSlot(EquipmentSlotType.CHEST, new ItemStack(Items.NETHERITE_CHESTPLATE));
+			zombie.setItemStackToSlot(EquipmentSlotType.LEGS, new ItemStack(Items.NETHERITE_LEGGINGS));
+			zombie.setItemStackToSlot(EquipmentSlotType.FEET, new ItemStack(Items.NETHERITE_BOOTS));
+		
 			
 		}
+		
+		if (!event.getEntity().world.isRemote() && event.getEntity().getType().equals(EntityType.ENDERMAN)) {
+			EndermanEntity enderman = (EndermanEntity) event.getEntity();
+			enderman.setHeldBlockState(Blocks.BEACON.getDefaultState());
+			enderman.addPotionEffect(new EffectInstance(Effects.GLOWING, 100));
+			
+		}
+		
+		
 	}
 }
